@@ -18,5 +18,7 @@ class MoviesController < ApplicationController
       .permit(:title, :descriptions, :rating, :released_on, :total_gross)
 
     @movie.update(movie_params)
+
+    redirect_to @movie
   end
 end
