@@ -12,11 +12,10 @@ class MoviesController < ApplicationController
   end
 
   def update
-    @movie = Movie.find(params[:id])
-
     movie_params = params.require(:movie)
-      .permit(:title, :descriptions, :rating, :released_on, :total_gross)
+      .permit(:title, :description, :rating, :released_on, :total_gross)
 
+    @movie = Movie.find(params[:id])
     @movie.update(movie_params)
 
     redirect_to @movie
@@ -24,5 +23,15 @@ class MoviesController < ApplicationController
 
   def new
     @movie = Movie.new
+  end
+
+  def create
+    movie_params = params.require(:movie)
+      .permit(:title, :description, :rating, :released_on, :total_gross)
+
+    @movie = Movie.new(movie_params)
+    @movie.save
+
+    redirect_to @movie
   end
 end
